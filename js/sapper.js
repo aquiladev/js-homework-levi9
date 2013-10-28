@@ -64,16 +64,16 @@
 			var prevY = pos.y - 1;
 			var nextY = pos.y + 1;
 			if(cells[prevX] != undefined){
-				around.push(cells[prevX][prevY]);
-				around.push(cells[prevX][pos.y]);
-				around.push(cells[prevX][nextY]);
+				around.push(cells[prevX][prevY],
+						cells[prevX][pos.y],
+						cells[prevX][nextY]);
 			}
 			around.push(cells[pos.x][prevY]);
 			around.push(cells[pos.x][nextY]);
 			if(cells[nextX] != undefined){
-				around.push(cells[nextX][prevY]);
-				around.push(cells[nextX][pos.y]);
-				around.push(cells[nextX][nextY]);
+				around.push(cells[nextX][prevY],
+						cells[nextX][pos.y],
+						cells[nextX][nextY]);
 			}
 			var result = [];
 			for (var i = 0; i < around.length; i++) {
@@ -91,12 +91,12 @@
 		
 		function generateField(countMines, size, callback){
 			var cells = [],
-				mines = countMines
+				mines = countMines,
 				options = { callback: callback };
 			for (var x = 0; x < size.x; x++) {
 				cells.push([]);
 				for (var y = 0; y < size.y; y++) {
-					options['position'] = {x: x, y: y};
+					options.position = {x: x, y: y};
 					cells[x][y] = new Cell(options);
 				}
 			}
